@@ -3,7 +3,7 @@
   <component name="SonarLintProjectSettings">
     <option name="moduleMapping">
       <map>
-        <entry key="atmService" value="untitled" />
+        <entry key="AtmService" value="untitled" />
       </map>
     </option>
   </component>
