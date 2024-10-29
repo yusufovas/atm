@@ -1,40 +1,27 @@
 package org.example;
 
-import java.util.Scanner;
+import org.example.auth.HandleLogin;
+import org.example.auth.HandleRegister;
+
+import java.util.*;
 
 public class AtmService {
+
     public static void main(String[] args) {
-        double balance;
+        Map<String, String> users = new HashMap<String, String>();
+        users.put("+998917738733", "hello");
+
         Scanner scanner = new Scanner(System.in);
         int lang = chooseLang(scanner);
-        String phoneNumber = phoneNumber(scanner);
+        int loginOrRegister = auth(scanner);
 
-        while (true) {
-            if (lang == 1) {
-                System.out.println("Welcome!");
-                System.out.println("1. Check Balance");
-                System.out.println("3. Withdraw");
-                System.out.println("4. Exit");
-                System.out.print("Choose an option: ");
-            } else if (lang == 2) {
-                System.out.println("Xush kelibsiz!");
-                System.out.println("1. Balansni tekshirish");
-                System.out.println("3. Naqd pul yechish");
-                System.out.println("4. Chiqish");
-                System.out.print("Tanlang: ");
-            } else if (lang == 3) {
-                System.out.println("Добро пожаловать!");
-                System.out.println("1. Проверить баланс");
-                System.out.println("3. Выдать наличные");
-                System.out.println("4. Выход");
-                System.out.print("Выберите опцию: ");
-            } else {
-                System.out.println("Invalid input!");
-                break;
-            }
-            int choice = scanner.nextInt();
+        if (loginOrRegister == 1) {
+            HandleLogin.login(users, lang);
+
+        } else if (loginOrRegister == 2) {
+            System.out.println(users);
+            HandleRegister.register(users, lang);
         }
-        scanner.close();
     }
 
     public static int chooseLang(Scanner scanner) {
@@ -47,8 +34,10 @@ public class AtmService {
         return choice;
     }
 
-    public static String phoneNumber(Scanner scanner) {
-        System.out.println("Enter your phone number: ");
-        return scanner.next();
+    public static int auth(Scanner scanner) {
+        System.out.println("1. Login / Kirish / Vxod");
+        System.out.println("2. Register / Ro'yxatdan o'tish / Zaregistrirovat'sa");
+        int choice = scanner.nextInt();
+        return choice;
     }
 }
